@@ -30,26 +30,30 @@ public class VentanaColeccion extends JPanel {
         btnOrdRareza.addActionListener(e -> {
             System.out.println("Botón: Ordenar por Rareza");
             Sistema.getInstance().ordenarCartasPorRareza();
+        	panelGrilla.removeAll();
             actualizarVista();
         });
 
         btnOrdNombre.addActionListener(e -> {
             System.out.println("Botón: Ordenar por Nombre");
             Sistema.getInstance().ordenarCartasPorNombre();
+        	panelGrilla.removeAll();
             actualizarVista();
         });
 
         btnOrdPoder.addActionListener(e -> {
             System.out.println("Botón: Ordenar por Poder");
             Sistema.getInstance().ordenarCartasPorPoder();
+        	panelGrilla.removeAll();
             actualizarVista();
         });
     }
 
     public void actualizarVista() {
-    	panelGrilla.removeAll(); 
-        for (Carta carta : Sistema.getInstance().leerArchivo()) {
-            JButton tarjetaCarta = new JButton(carta.getNombre() + " - " + carta.getPoder());
+    	panelGrilla.removeAll();
+        for (Carta carta : Sistema.getInstance().getCartas()) {
+        	JTextArea tarjetaCarta = new JTextArea(carta.getNombre() + " - " + carta.getPoder());
+        	tarjetaCarta.setEditable(false);
             panelGrilla.add(tarjetaCarta);
         }
         panelGrilla.revalidate();
