@@ -110,17 +110,4 @@ public class Sistema {
 		}
 		return cantidad;
 	}
-	public void agregarItem(String nombre,int raro, String string,int daño, int cant_energia) {
-	    try {
-	    	FileWriter archivoUsuarios = new FileWriter("Sobres.txt", true);
-	        BufferedWriter escritorBuffer = new BufferedWriter(archivoUsuarios);
-	        escritorBuffer.newLine();
-	        escritorBuffer.write(nombre + ";" + raro + ";" + string + ";" + daño + ";" + cant_energia);
-	        escritorBuffer.close();
-	        System.out.println("Ítem añadido correctamente.");
-			Sistema.getInstance().leerArchivo();
-	    } catch (Exception e) {
-	        System.out.println("Error al escribir en el Archivo de Sobres: " + e.getMessage());
-	    }
-	}
 }
