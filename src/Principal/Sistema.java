@@ -1,51 +1,21 @@
-package Package1;
+package Principal;
 
-public class Sistema implements FactoryCarta {
-	private static Sistema instancia; //estático ya que pertenece a la clase, no es instanciable
-	//la variable instancia queda reservada a la clase por lo que es visible por todo hacia abajo jerárquicamente y eso significa que no se podra usar la misma variable como solo local en alguna parte
-	private Sistema() {};
-	
-	public static Sistema getInstancia() {
-		/* Esta variable es para el singleton de Sistema;
-		 * @return Sistema
-		 */
-		if (instancia == null) {// si la instancia no se ha creado, se procede a crear y posterior se retorna
-			instancia = new Sistema();
-			return instancia;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Sistema {
+	private ArrayList<Carta> cartas = new ArrayList<>(); 
+	private static Sistema sis;
+	private Sistema() {
+	}
+	public static Sistema getInstance() {
+		if (sis == null) {
+			sis = new Sistema();
 		}
-		else {
-			return instancia;// como la instancia ya esta creada que retorne esta
-		}
-	}
-
-	@Override
-	public Pokemon crearPokemon(String nombre, float rareza, String tipo, float daño, float cantEnergias) {
-		/* Es parte del factory, se crea dentro de sistema y factory es una interfaz
-		 * @return Pokemon
-		 */
-		
-		Pokemon pokemon = new Pokemon (nombre, rareza , tipo, daño, cantEnergias);
-		
-		return pokemon;
-	}
-
-	@Override
-	public Item crearItem(String nombre, float rareza, String tipo, float bonificacion) {
-		/* Parte del factory
-		 * @return Item
-		 */
-		Item item = new Item(nombre, rareza, tipo, bonificacion);
-		return item;
-	}
-
-	@Override
-	public Supporter crearSupporter(String nombre, float rareza, String tipo, float efectosPorTurno) {
-		/* Parte del factory
-		 * @return Supporter
-		 */  
-		Supporter supporter = new Supporter (nombre, rareza, tipo, efectosPorTurno);
-		
-		return supporter;
+		return sis;
 	}
 	public ArrayList<Carta> getCartas() {
 	    return this.cartas; 
@@ -128,27 +98,27 @@ public class Sistema implements FactoryCarta {
 				String linea = lector.nextLine();
 				String[] partes = linea.split(";");
 				String nombre = partes[0];
-				int rareza = Integer.parseInt(partes[1]);
 				String tipo = partes[2];
 				String extra1 = partes[3];
 				if (nombre != null && tipo != null && extra1 != null) {
 					cantidad += 1;
 				}
 			}	
+			lector.close();
 		} catch (Exception e) {
 			System.out.println("Error de Leer Archivo de Sobres " + e);
 		}
 		return cantidad;
 	}
 	public void agregarItem(String nombre,int raro, String string,int daño, int cant_energia) {
-		if (!string.equalsIgnoreCase("Pokemon")) {
-	        return; 
-	    }
 	    try {
 	    	FileWriter archivoUsuarios = new FileWriter("Sobres.txt", true);
 	        BufferedWriter escritorBuffer = new BufferedWriter(archivoUsuarios);
+	        escritorBuffer.newLine();
 	        escritorBuffer.write(nombre + ";" + raro + ";" + string + ";" + daño + ";" + cant_energia);
+	        escritorBuffer.close();
 	        System.out.println("Ítem añadido correctamente.");
+			Sistema.getInstance().leerArchivo();
 	    } catch (Exception e) {
 	        System.out.println("Error al escribir en el Archivo de Sobres: " + e.getMessage());
 	    }

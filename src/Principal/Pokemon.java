@@ -1,6 +1,6 @@
 package Principal;
 
-public class Pokemon extends Carta{
+public class Pokemon extends Carta {
 	private float daño;
 	private float cantEnergias;
 	private float poder;
@@ -16,13 +16,14 @@ public class Pokemon extends Carta{
 		this.daño = daño;
 		this.cantEnergias = cantEnergias;
 	}
-	public void calcularPuntaje () {
+	public float calcularPuntaje() {
 		/* @return void 
 		 * calcularPuntaje no tiene parametros de entrada ya que son los que pertenecen a la misma instancia
 		 * para calcular el puntaje en el caso de pokemon se usa (daño/cantEnergias)*100 segun lo informado
 		 * en la descripción del taller. en caso de otros tipos tendran otro metodo de calcular puntaje
 		 */
 		this.poder = (daño/cantEnergias)*100; 
+		return this.poder;
 	}
 	
 

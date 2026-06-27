@@ -11,7 +11,8 @@ public class VentanaOtra extends JDialog {
         setModal(true);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-        JLabel lblImagenGrande = new JLabel("Imagen Grande", SwingConstants.CENTER);
+        MostrarCarta m = new MostrarCarta(carta);
+        JLabel lblImagenGrande = new JLabel(new ImageIcon(m.RetornoNombre(carta)), SwingConstants.CENTER);
         add(lblImagenGrande, BorderLayout.CENTER);
         JPanel panelStats = new JPanel(new GridLayout(5, 1));
         panelStats.add(new JLabel("Nombre: " + carta.getNombre()));

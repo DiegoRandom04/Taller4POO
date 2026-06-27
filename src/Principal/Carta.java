@@ -1,6 +1,6 @@
 package Principal;
 
-public class Carta {
+public abstract class Carta {
 	private String nombre;
 	private float rareza;
 	private String tipo;
@@ -13,6 +13,7 @@ public class Carta {
 		this.nombre = nombre;
 		this.rareza = rareza;
 		this.tipo = tipo;
+		this.poder = 0;
 	}
 	public String getNombre() {
 		/* @return String
@@ -52,4 +53,9 @@ public class Carta {
 		 */
 		this.tipo = tipo;
 	}
+	public float calcularPoder() {
+        this.poder = calcularPuntaje();
+        return this.poder;
+    }
+	public abstract float calcularPuntaje();
 }

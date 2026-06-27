@@ -1,12 +1,17 @@
-package Package1;
+package Principal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class VentanaColeccion extends JPanel {
 
     private JPanel panelGrilla;
     private JButton btnOrdRareza, btnOrdNombre, btnOrdPoder;
+	private ArrayList<Carta> cartas;
+	public ArrayList<Carta> getCartas() {
+	    return this.cartas; 
+	}
 
     public VentanaColeccion() {
         setLayout(new BorderLayout());
@@ -54,7 +59,8 @@ public class VentanaColeccion extends JPanel {
         for (Carta carta : Sistema.getInstance().getCartas()) {
         	JTextArea tarjetaCarta = new JTextArea(carta.getNombre() + " - " + carta.getPoder());
         	tarjetaCarta.setEditable(false);
-            panelGrilla.add(tarjetaCarta);
+        	MostrarCarta m = new MostrarCarta(carta);
+            panelGrilla.add(m);
         }
         panelGrilla.revalidate();
         panelGrilla.repaint();
