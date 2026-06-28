@@ -1,14 +1,17 @@
 package Principal;
 
+//la clase principal Carta
+
 public abstract class Carta {
+	//Atributos de Carta
 	private String nombre;
 	private float rareza;
 	private String tipo;
 	private float poder;
-	
 	public float getPoder() {
 		return poder;
 	}
+	//creamos el constructor para
 	public Carta (String nombre, float rareza, String tipo) {
 		this.nombre = nombre;
 		this.rareza = rareza;
@@ -53,9 +56,11 @@ public abstract class Carta {
 		 */
 		this.tipo = tipo;
 	}
+	//para calcular el puntaje
 	public float calcularPoder() {
         this.poder = calcularPuntaje();
         return this.poder;
     }
+	//hacemos la clase abstracta (más de una clase) para calcular su puntaje
 	public abstract float calcularPuntaje();
 }

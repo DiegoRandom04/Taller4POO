@@ -1,6 +1,7 @@
 package Principal;
 
 public class Pokemon extends Carta {
+	//atributos de pokemon
 	private float daño;
 	private float cantEnergias;
 	private float poder;
